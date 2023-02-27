@@ -11,7 +11,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import dev.xero.amphibians.AmphibiansApplication
-import dev.xero.amphibians.model.AmphibianData
 import dev.xero.amphibians.repository.AmphibianRepositoryImplementation
 import kotlinx.coroutines.launch
 import okio.IOException
@@ -22,7 +21,7 @@ class AmphibiansViewModel(
 
 	private val TAG = "APP"
 
-	var _uiState: AmphibiansUiState by mutableStateOf(AmphibiansUiState.Loading)
+	var uiState: AmphibiansUiState by mutableStateOf(AmphibiansUiState.Loading)
 		private set
 
 	// ATTEMPT TO FETCH THE DATA
@@ -32,7 +31,7 @@ class AmphibiansViewModel(
 
 	 private fun getAmphibians() {
 		 viewModelScope.launch {
-			 _uiState = try {
+			 uiState = try {
 				 AmphibiansUiState.Success(data = amphibiansRepository.getAmphibianData())
 			 } catch (e: IOException) {
 				 Log.d(TAG, e.toString())
