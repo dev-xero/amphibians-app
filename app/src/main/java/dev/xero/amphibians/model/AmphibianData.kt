@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 data class AmphibianData(
 	val id: Int,
 	val name: String?,
+	val type: String?,
 	val description: String?,
 	@SerialName("img_src") val imgSrc: String?
 )
