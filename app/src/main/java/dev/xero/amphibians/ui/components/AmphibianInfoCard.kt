@@ -53,8 +53,8 @@ fun AmphibianInfoCard(
 					)
 					Text(
 						text = amphibianData.description ?: "No Description",
-						fontSize = 16.sp,
-						fontWeight = FontWeight.Bold,
+						fontSize = 14.sp,
+						fontWeight = FontWeight.Medium,
 						modifier = Modifier.padding(bottom = 8.dp),
 						color = DeepBlue
 					)
