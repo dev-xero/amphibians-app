@@ -19,7 +19,7 @@ import dev.xero.amphibians.ui.viewmodel.AmphibiansViewModel
 fun AmphibiansApp(
 	modifier: Modifier = Modifier
 ) {
-	val viewModel: AmphibiansViewModel = viewModel()
+	val viewModel: AmphibiansViewModel = viewModel(factory = AmphibiansViewModel.Factory)
 	val uiState by viewModel.uiState.collectAsState()
 
 	Scaffold(

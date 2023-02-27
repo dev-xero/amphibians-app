@@ -1,37 +1,32 @@
 package dev.xero.amphibians.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import dev.xero.amphibians.AmphibiansApplication
 import dev.xero.amphibians.model.AmphibianData
+import dev.xero.amphibians.repository.AmphibianRepositoryImplementation
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class AmphibiansViewModel : ViewModel() {
+class AmphibiansViewModel(
+	private val amphibiansRepository: AmphibianRepositoryImplementation
+) : ViewModel() {
 
 	private val _uiState = MutableStateFlow(AmphibiansUiState())
 	val uiState: StateFlow<AmphibiansUiState> = _uiState.asStateFlow()
 
-	/*TODO: REMOVE THIS LATER, TESTING WITH FAKES*/
-	init {
-		val fakeData = listOf(
-			AmphibianData(
-				id = 1,
-				name = "Amphibian 01",
-				description = "Description on amphibian 01"
-			),
-			AmphibianData(
-				id = 2,
-				name = "Amphibian 02",
-				description = "Description on amphibian 02"
-			),
-			AmphibianData(
-				id = 3,
-				name = "Amphibian 03",
-				description = "Description on amphibian 03"
-			)
-		)
-
-		_uiState.value.data = fakeData
-
+	// Factory for the viewModel
+	companion object {
+		val Factory: ViewModelProvider.Factory = viewModelFactory {
+			initializer {
+				val application = (this[APPLICATION_KEY] as AmphibiansApplication)
+				val amphibiansRepository = application.container.amphibiansRepository
+				AmphibiansViewModel(amphibiansRepository = amphibiansRepository)
+			}
+		}
 	}
 }
