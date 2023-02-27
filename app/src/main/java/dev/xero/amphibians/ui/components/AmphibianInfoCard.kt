@@ -17,10 +17,8 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import dev.xero.amphibians.model.AmphibianData
-import dev.xero.amphibians.ui.theme.DeepBlue
 import dev.xero.amphibians.R
-import dev.xero.amphibians.ui.theme.MudGreen
-import dev.xero.amphibians.ui.theme.LightGreen
+import dev.xero.amphibians.ui.theme.*
 
 @Composable
 fun AmphibianInfoCard(
@@ -47,6 +45,13 @@ fun AmphibianInfoCard(
 					Text(
 						text = amphibianData.name ?: "No Title",
 						fontSize = 22.sp,
+						fontWeight = FontWeight.Bold,
+						modifier = Modifier.padding(bottom = 4.dp),
+						color = DeepGreen
+					)
+					Text(
+						text = amphibianData.type ?: "Unknown",
+						fontSize = 16.sp,
 						fontWeight = FontWeight.Bold,
 						modifier = Modifier.padding(bottom = 4.dp),
 						color = MudGreen
