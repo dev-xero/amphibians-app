@@ -3,5 +3,5 @@
     <string name="image_not_found">Image Not Found</string>
     <string name="loading">Loading</string>
     <string name="network_error">Unable to get data from the server</string>
-    <string name="suggestion">Try checking your internet connection and try again</string>
+    <string name="suggestion">Try checking your internet connection</string>
 </resources>
