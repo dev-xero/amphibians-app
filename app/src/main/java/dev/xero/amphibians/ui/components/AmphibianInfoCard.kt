@@ -1,6 +1,5 @@
 package dev.xero.amphibians.ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,12 +9,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import dev.xero.amphibians.model.AmphibianData
 import dev.xero.amphibians.ui.theme.DeepBlue
 import dev.xero.amphibians.R
@@ -33,9 +33,6 @@ fun AmphibianInfoCard(
 			.clip(shape = RoundedCornerShape(12.dp)),
 		elevation = 2.dp
 	) {
-
-		/*TODO: CHANGE THIS LATER WHEN USING ASYNC IMAGE()*/
-		val imageRes = amphibianData.imgSrc ?: R.drawable.image_not_found
 
 		Column(modifier = Modifier.fillMaxWidth()) {
 			// Info Card Row
@@ -64,10 +61,14 @@ fun AmphibianInfoCard(
 				}
 			}
 
-			/*TODO: CHANGE THIS TO ASYNC IMAGE()*/
-			Image(
-				painter = painterResource(id = imageRes),
-				contentDescription = stringResource(id = R.string.image_not_found),
+			AsyncImage(
+				model = ImageRequest.Builder(context = LocalContext.current)
+					.data(amphibianData.imgSrc)
+					.crossfade(enable = true)
+					.error(R.drawable.image_not_found)
+					.placeholder(R.drawable.loading_img)
+					.build(),
+				contentDescription = "card_img",
 				contentScale = ContentScale.FillWidth,
 				modifier = Modifier.fillMaxWidth()
 			)
@@ -81,6 +82,7 @@ fun AmphibianCardInfoDefaultPreview() {
 	AmphibianInfoCard(amphibianData = AmphibianData(
 		id = 0,
 		name = "Title",
-		description = "Description"
+		description = "Description",
+		imgSrc = ""
 	))
 }
