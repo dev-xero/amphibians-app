@@ -20,7 +20,7 @@ import dev.xero.amphibians.model.AmphibianData
 import dev.xero.amphibians.ui.theme.DeepBlue
 import dev.xero.amphibians.R
 import dev.xero.amphibians.ui.theme.MudGreen
-import dev.xero.amphibians.ui.theme.White
+import dev.xero.amphibians.ui.theme.LightGreen
 
 @Composable
 fun AmphibianInfoCard(
@@ -42,7 +42,7 @@ fun AmphibianInfoCard(
 			Row(
 				modifier = Modifier
 					.fillMaxWidth()
-					.background(color = White)
+					.background(color = LightGreen)
 			) {
 				Column(
 					modifier = Modifier.padding(12.dp)
