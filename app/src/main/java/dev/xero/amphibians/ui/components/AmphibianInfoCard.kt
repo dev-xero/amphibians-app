@@ -1,6 +1,7 @@
 package dev.xero.amphibians.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -19,6 +20,7 @@ import dev.xero.amphibians.model.AmphibianData
 import dev.xero.amphibians.ui.theme.DeepBlue
 import dev.xero.amphibians.R
 import dev.xero.amphibians.ui.theme.MudGreen
+import dev.xero.amphibians.ui.theme.White
 
 @Composable
 fun AmphibianInfoCard(
@@ -29,7 +31,7 @@ fun AmphibianInfoCard(
 		modifier = modifier
 			.fillMaxWidth()
 			.clip(shape = RoundedCornerShape(12.dp)),
-		elevation = 2.dp,
+		elevation = 2.dp
 	) {
 
 		/*TODO: CHANGE THIS LATER WHEN USING ASYNC IMAGE()*/
@@ -37,20 +39,24 @@ fun AmphibianInfoCard(
 
 		Column(modifier = Modifier.fillMaxWidth()) {
 			// Info Card Row
-			Row(modifier = Modifier.fillMaxWidth()) {
+			Row(
+				modifier = Modifier
+					.fillMaxWidth()
+					.background(color = White)
+			) {
 				Column(
 					modifier = Modifier.padding(12.dp)
 				) {
 					Text(
 						text = amphibianData.title ?: "No Title",
-						fontSize = 20.sp,
+						fontSize = 22.sp,
 						fontWeight = FontWeight.Bold,
-						modifier = Modifier.padding(bottom = 8.dp),
+						modifier = Modifier.padding(bottom = 4.dp),
 						color = MudGreen
 					)
 					Text(
 						text = amphibianData.content ?: "No Description",
-						fontSize = 12.sp,
+						fontSize = 16.sp,
 						fontWeight = FontWeight.Bold,
 						modifier = Modifier.padding(bottom = 8.dp),
 						color = DeepBlue
@@ -73,6 +79,7 @@ fun AmphibianInfoCard(
 @Composable
 fun AmphibianCardInfoDefaultPreview() {
 	AmphibianInfoCard(amphibianData = AmphibianData(
+		id = 0,
 		title = "Title",
 		content = "Description"
 	))
