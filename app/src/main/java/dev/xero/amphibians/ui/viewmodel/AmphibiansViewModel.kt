@@ -1,37 +1,54 @@
 package dev.xero.amphibians.ui.viewmodel
 
+import android.util.Log
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import dev.xero.amphibians.model.AmphibianData
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import dev.xero.amphibians.AmphibiansApplication
+import dev.xero.amphibians.repository.AmphibianRepositoryImplementation
+import kotlinx.coroutines.launch
+import okio.IOException
 
-class AmphibiansViewModel : ViewModel() {
+class AmphibiansViewModel(
+	private val amphibiansRepository: AmphibianRepositoryImplementation
+) : ViewModel() {
 
-	private val _uiState = MutableStateFlow(AmphibiansUiState())
-	val uiState: StateFlow<AmphibiansUiState> = _uiState.asStateFlow()
+	private val TAG = "APP"
 
-	/*TODO: REMOVE THIS LATER, TESTING WITH FAKES*/
+	var uiState: AmphibiansUiState by mutableStateOf(AmphibiansUiState.Loading)
+		private set
+
+	// ATTEMPT TO FETCH THE DATA
 	init {
-		val fakeData = listOf(
-			AmphibianData(
-				id = 1,
-				title = "Amphibian 01",
-				content = "Description on amphibian 01"
-			),
-			AmphibianData(
-				id = 2,
-				title = "Amphibian 02",
-				content = "Description on amphibian 02"
-			),
-			AmphibianData(
-				id = 3,
-				title = "Amphibian 03",
-				content = "Description on amphibian 03"
-			)
-		)
+		getAmphibians()
+	}
 
-		_uiState.value.data = fakeData
+	 private fun getAmphibians() {
+		 viewModelScope.launch {
+			 uiState = try {
+				 AmphibiansUiState.Success(data = amphibiansRepository.getAmphibianData())
+			 } catch (e: IOException) {
+				 Log.d(TAG, e.toString())
+				 AmphibiansUiState.Failure
+			 }
+		 }
+	}
 
+
+	// Factory for the viewModel
+	companion object {
+		val Factory: ViewModelProvider.Factory = viewModelFactory {
+			initializer {
+				val application = (this[APPLICATION_KEY] as AmphibiansApplication)
+				val amphibiansRepository = application.container.amphibiansRepository
+				AmphibiansViewModel(amphibiansRepository = amphibiansRepository)
+			}
+		}
 	}
 }

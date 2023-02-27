@@ -1,11 +1,12 @@
 package dev.xero.amphibians.model
 
-import androidx.annotation.DrawableRes
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class AmphibianData(
-	val id: Int,
-	val title: String?,
-	val content: String?,
-	/*TODO: CHANGE THIS TO STRING LATER*/
-	@DrawableRes val imgSrc: Int? = null
+	val name: String?,
+	val type: String?,
+	val description: String?,
+	@SerialName("img_src") val imgSrc: String?
 )
