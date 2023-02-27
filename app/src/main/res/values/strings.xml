@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Amphibians</string>
+    <string name="image_not_found">Image Not Found</string>
 </resources>
