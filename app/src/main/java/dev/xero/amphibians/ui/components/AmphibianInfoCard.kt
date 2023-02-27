@@ -80,7 +80,6 @@ fun AmphibianInfoCard(
 @Composable
 fun AmphibianCardInfoDefaultPreview() {
 	AmphibianInfoCard(amphibianData = AmphibianData(
-		id = 0,
 		name = "Title",
 		description = "Description",
 		type = "Type",

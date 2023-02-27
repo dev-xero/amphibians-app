@@ -26,7 +26,7 @@ fun HomeScreen(
 			.padding(8.dp),
 		verticalArrangement = Arrangement.spacedBy(12.dp)
 	) {
-			items(items = amphibianUiState.data, key = { item -> item.id }) {
+			items(items = amphibianUiState.data, key = { item -> item.imgSrc!! }) {
 					dataItem -> AmphibianInfoCard(amphibianData = dataItem)
 			}
 		}

@@ -5,7 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AmphibianData(
-	val id: Int,
 	val name: String?,
 	val type: String?,
 	val description: String?,
