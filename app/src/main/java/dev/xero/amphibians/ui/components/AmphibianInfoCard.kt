@@ -83,6 +83,7 @@ fun AmphibianCardInfoDefaultPreview() {
 		id = 0,
 		name = "Title",
 		description = "Description",
+		type = "Type",
 		imgSrc = ""
 	))
 }
