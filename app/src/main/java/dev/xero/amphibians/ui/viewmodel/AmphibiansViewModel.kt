@@ -16,18 +16,18 @@ class AmphibiansViewModel : ViewModel() {
 		val fakeData = listOf(
 			AmphibianData(
 				id = 1,
-				title = "Amphibian 01",
-				content = "Description on amphibian 01"
+				name = "Amphibian 01",
+				description = "Description on amphibian 01"
 			),
 			AmphibianData(
 				id = 2,
-				title = "Amphibian 02",
-				content = "Description on amphibian 02"
+				name = "Amphibian 02",
+				description = "Description on amphibian 02"
 			),
 			AmphibianData(
 				id = 3,
-				title = "Amphibian 03",
-				content = "Description on amphibian 03"
+				name = "Amphibian 03",
+				description = "Description on amphibian 03"
 			)
 		)
 

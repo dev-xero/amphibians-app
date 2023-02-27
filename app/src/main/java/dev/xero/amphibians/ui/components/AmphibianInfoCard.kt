@@ -48,14 +48,14 @@ fun AmphibianInfoCard(
 					modifier = Modifier.padding(12.dp)
 				) {
 					Text(
-						text = amphibianData.title ?: "No Title",
+						text = amphibianData.name ?: "No Title",
 						fontSize = 22.sp,
 						fontWeight = FontWeight.Bold,
 						modifier = Modifier.padding(bottom = 4.dp),
 						color = MudGreen
 					)
 					Text(
-						text = amphibianData.content ?: "No Description",
+						text = amphibianData.description ?: "No Description",
 						fontSize = 16.sp,
 						fontWeight = FontWeight.Bold,
 						modifier = Modifier.padding(bottom = 8.dp),
@@ -80,7 +80,7 @@ fun AmphibianInfoCard(
 fun AmphibianCardInfoDefaultPreview() {
 	AmphibianInfoCard(amphibianData = AmphibianData(
 		id = 0,
-		title = "Title",
-		content = "Description"
+		name = "Title",
+		description = "Description"
 	))
 }
